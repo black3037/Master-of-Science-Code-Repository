@@ -19,6 +19,7 @@ Voltage = [0.0, 4.64, 7.60, 15.1, 22.0, 30.0]               # Volts (Peak-Peak)
 
 # Convert Speed to Appropriate Units
 Speed_RAD = [(2.0*math.pi/60.0)*x for x in Speed_RPM]       # RPM -> Rad/s
+Voltage = [(x/2.0) for x in Voltage]
 
 # Data to Numpy Matricies
 Speed = np.matrix(Speed_RAD)
@@ -29,6 +30,7 @@ b = inv(Speed*np.transpose(Speed))*Speed*np.transpose(Voltage)
 flattened  = [val for sublist in b.tolist() for val in sublist]
 b = flattened[0]
 print b
+print Speed_RAD
 
 # Create plottable data to show best fit
 y = [b*x for x in Speed_RAD]
